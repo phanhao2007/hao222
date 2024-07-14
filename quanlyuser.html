@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Người dùng</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f5f5f5;
+            display: flex;
+        }
+
+        .navbar {
+            background-color: #343a40;
+            width: 250px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding-top: 20px;
+        }
+
+        .navbar-logo {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 24px;
+            font-weight: bold;
+            display: block;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .navbar-menu {
+            list-style: none;
+            padding: 0;
+        }
+
+        .navbar-menu li {
+            margin: 10px 0;
+        }
+
+        .navbar-menu a {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 20px;
+            display: block;
+        }
+
+        .navbar-menu a:hover {
+            background-color: #495057;
+            border-radius: 4px;
+        }
+
+        .content {
+            margin-left: 270px;
+            padding: 20px;
+            width: calc(100% - 270px);
+        }
+
+        h1, h2 {
+            color: #343a40;
+        }
+
+        .home-section, .users-section, .add-user-section, .settings-section {
+            background-color: #ffffff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .user-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .user-table th, .user-table td {
+            border: 1px solid #dee2e6;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .user-table th {
+            background-color: #f8f9fa;
+        }
+
+        .footer {
+            background-color: #343a40;
+            color: #ffffff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            left: 270px;
+            width: calc(100% - 270px);
+        }
+
+        form label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        form input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+        }
+
+        form button {
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        form button:hover {
+            background-color: #0056b3;
+        }
+
+        .delete-button {
+            background-color: #dc3545;
+            color: #ffffff;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .delete-button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="#" class="navbar-logo">Quản lý Người dùng</a>
+        <ul class="navbar-menu">
+            <li><a href="#home">Trang Chủ</a></li>
+            <li><a href="#users">Người Dùng</a></li>
+            <li><a href="#add-user">Thêm Người Dùng</a></li>
+            <li><a href="#settings">Cài Đặt</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <section id="home" class="home-section">
+            <h1>Chào Mừng Đến Với Quản Lý Người Dùng</h1>
+            <p>Quản lý người dùng của bạn một cách hiệu quả và chuyên nghiệp.</p>
+        </section>
+
+        <section id="users" class="users-section">
+            <h2>Danh Sách Người Dùng</h2>
+            <table class="user-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên</th>
+                        <th>Email</th>
+                        <th>Số Điện Thoại</th>
+                        <th>Năm Sinh</th>
+                        <th>Hành Động</th>
+                    </tr>
+                </thead>
+                <tbody id="productTableBody">
+                    <!-- User rows will be populated here -->
+                </tbody>
+            </table>
+
+    <footer class="footer">
+        <p>&copy; 2024 Quản lý Người dùng. Bảo lưu mọi quyền.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const userList = document.getElementById('user-list');
+            const addUserForm = document.getElementById('add-user-form');
+            const productTableBody = document.getElementById('productTableBody');
+            let products = JSON.parse(localStorage.getItem("users"));
+            console.log(products);
+          
+                function renderProducts() {
+                    products.forEach((product, index) => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${product.id}</td>
+                        <td>${product.name}</td>
+                        <td>${product.email}</td>
+                        <td>${product.phone}</td>
+                        <td>${product.dob}</td>
+                        <td>
+                            <button onclick="deleteUser(${index})">Xóa</button>
+                        </td>
+                    `;
+                    productTableBody.appendChild(row);
+                });
+            }
+            renderProducts()
+            window.deleteUser = function(index) {
+                products.splice(index, 1);
+                localStorage.setItem("users",JSON.stringify(products));
+                alert("Xóa thành công")
+                renderProducts();
+            };
+        });
+    </script>
+</body>
+</html>

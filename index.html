@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yêu Sách - Khám phá Thế giới qua Trang Sách</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            text-align: center;
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px 0;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+        }
+        nav a {
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            text-align: center;
+        }
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .search-bar {
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+        }
+        .search-bar input[type="text"] {
+            padding: 10px;
+            width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .search-bar input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .search-bar input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .suggestions {
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            border: 1px solid #ddd;
+            width: 300px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+        }
+        .suggestions p {
+            margin: 0;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .suggestions p:hover {
+            background-color: #f4f4f4;
+        }
+        .content {
+            padding: 20px;
+        }
+        .section h2 {
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 10px;
+        }
+        .books, .articles, .reviews {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .books .book, .articles .article, .reviews .review {
+            flex: 1 1 30%;
+            background: white;
+            margin: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+        footer .social a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+        footer .social a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Thư viện Kỳ diệu</h1>
+    </header>
+    <nav>
+        <a href="#">Trang chủ</a>
+        <a href="#">Giới thiệu</a>
+        <a href="#">Thể loại sách</a>
+        <a href="#">Bài viết</a>
+        <a href="quanly3.html">Quản lý người dùng</a>
+        <a href="quanlyuser.html">Admin</a>
+    </nav>
+    <div class="search-bar">
+        <form action="/search" method="get">
+            <input type="text" id="search" name="query" placeholder="Tìm kiếm sách...">
+            <input type="submit" value="Tìm kiếm">
+        </form>
+        <div class="suggestions" id="suggestions"></div>
+    </div>
+
+    <div class="content">
+        <div class="section">
+            <h2>Giới thiệu</h2>
+            <p>Thư viện kỳ diệu ra đời với sứ mệnh mang đến cho người yêu sách những trải nghiệm tuyệt vời nhất. Chúng tôi cung cấp những bài đánh giá sách chuyên sâu, những gợi ý đọc sách và cập nhật thông tin về sách mới nhất.</p>
+        </div>
+
+        <div class="section">
+            <h2>Thể loại Sách</h2>
+            <div class="books">
+                <div class="book">
+                    <a href="vanhoc.html">văn học</a>
+                </div>
+                <div class="book">
+                    <a href="khoahoc.html">khoa học</a>
+                </div>
+                <div class="book">
+                    <a href="lichsu.html">lịch sử</a>
+                </div>
+                <!-- Thêm các thể loại sách khác tại đây -->
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Sách Mới Phát Hành</h2>
+            <div class="books">
+                <div class="book">
+                    <h3>Vui Cười Lên Cùng Chứng Khoán</h3>
+                </div>
+                <div class="book">
+                    <h3>15 Bí Kíp Thích Nghi Và Thăng Tiến Nơi làm Việc</h3>
+                </div>
+                <div class="book">
+                    <h3>Trở Thành Ứng Viên Được Săn Đón</h3>
+                </div>
+                <!-- Thêm các sách mới tại đây -->
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Đánh giá của Độc giả</h2>
+            <div class="reviews">
+                <div class="review">
+                    <p>"Cuốn sách này thực sự thay đổi cách nhìn của tôi về cuộc sống..." - Minh Anh</p>
+                </div>
+                <div class="review">
+                    <p>"Một câu chuyện cảm động và sâu sắc..." - Quang Huy</p>
+                </div>
+                <!-- Thêm các đánh giá khác tại đây -->
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Liên hệ: contact@yeusach.vn | Điện thoại: +84 123 456 789 | Địa chỉ: 123 Đường Sách, Hà Nội, Việt Nam</p>
+        <div class="social">
+            <a href="#">Facebook</a> | 
+            <a href="#">Instagram</a> | 
+            <a href="#">Twitter</a>
+        </div>
+        <p>&copy; 2024 Yêu Sách. Mọi quyền được bảo lưu.</p>
+    </footer>
+    <script>
+        // Sample data to simulate localStorage data
+        const sampleProducts = ["chủ nhân của những chiếc nhẩn", "CUỘC CHIẾN LỖ ĐEN", "Lịch Sử Chiến Tranh", "6 PHÁT MINH LÀM NÊN THỜI ĐẠI ", "Nhà Giả Kim"];
+        localStorage.setItem('products', JSON.stringify(sampleProducts));4
+
+        // Fetch products from localStorage
+        const products = JSON.parse(localStorage.getItem('products')) || [];
+
+        const searchInput = document.getElementById('search');
+        const suggestionsContainer = document.getElementById('suggestions');
+
+        searchInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            suggestionsContainer.innerHTML = '';
+            if (query) {
+                const filteredProducts = products.filter(product => product.toLowerCase().includes(query));
+                filteredProducts.forEach(product => {
+                    const suggestion = document.createElement('p');
+                    suggestion.textContent = product;
+                    suggestion.addEventListener('click', function() {
+                        searchInput.value = product;
+                        suggestionsContainer.innerHTML = '';
+                    });
+                    suggestionsContainer.appendChild(suggestion);
+                });
+                suggestionsContainer.style.display = 'block';
+            } else {
+                suggestionsContainer.style.display = 'none';
+            }
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!suggestionsContainer.contains(e.target) && e.target !== searchInput) {
+                suggestionsContainer.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Chủ Đọc Sách Văn học</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #444;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container {
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background-color: white;
+            border: 1px solid #ddd;
+            margin: 10px;
+            padding: 20px;
+            border-radius: 5px;
+            width: 200px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .card h1 {
+            font-size: 18px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+
+        .card .tacgia {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        #SaveProduct {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #SaveProduct:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Trang Chủ Đọc Sách Văn học</h1>
+    </header>
+    <nav>
+        <a href="index.html">Trang Chủ</a>
+        <a href="#">Thể Loại</a>
+        <a href="#">Tác Giả</a>
+        <a href="#">Liên Hệ</a>
+    </nav>
+    <div class="container" id="listCard"></div>
+    <button id="SaveProduct">Save</button>
+
+    <script>
+        const allProduct = [
+            {
+                id: "1",
+                name: "Nhà Giả Kim",
+                category: "văn học",
+                tacgia: "Paulo Coelho",
+                price: "200",
+                quantity: "1",
+                status: "còn hàng",
+                img: "https://cdn.tgdd.vn/Files/2023/03/10/1516432/10-cuon-sach-van-hoc-hay-tieu-thuyet-van-hoc-kinh-dien-202303110852195759.jpg",
+            },
+            {
+                id: "2",
+                name: "Bố già",
+                category: "văn học",
+                tacgia: "Mario Puzo",
+                price: "200",
+                quantity: "5",
+                status: "còn hàng",
+                img: "https://cdn.tgdd.vn/Files/2023/03/10/1516432/10-cuon-sach-van-hoc-hay-tieu-thuyet-van-hoc-kinh-dien-202303110852349404.jpg",
+            },
+            {
+                id: "3",
+                name: "Ông già và biển cả",
+                category: "văn học",
+                tacgia: "Ernest Hemingway",
+                price: "200",
+                quantity: "2",
+                status: "còn hàng",
+                img: "https://cdn.tgdd.vn/Files/2023/03/10/1516432/10-cuon-sach-van-hoc-hay-tieu-thuyet-van-hoc-kinh-dien-202303110853018145.jpg",
+            },
+            {
+                id: "4",
+                name: "Chúa tể của những chiếc nhẫn ",
+                category: "văn học",
+                tacgia: " J.R.R Tolkien",
+                price: "200",
+                quantity: "2",
+                status: "còn hàng",
+                img: "https://cdn.tgdd.vn/Files/2023/03/10/1516432/10-cuon-sach-van-hoc-hay-tieu-thuyet-van-hoc-kinh-dien-202303110853370564.jpg",
+            }
+        ];
+
+        let Save = document.getElementById("SaveProduct");
+        Save.addEventListener("click", function () {
+            localStorage.setItem("product", JSON.stringify(allProduct));
+            alert("Lưu thành công");
+        });
+
+        function createCard() {
+            let allProduct = JSON.parse(localStorage.getItem("product"));
+            let listCard = document.getElementById("listCard");
+            for (let i = 0; i < allProduct.length; i++) {
+                let product = allProduct[i];
+                if (product.category == "văn học") {
+                    let card = `
+                <div class="card" id=${product.id}>
+                    <img src=${product.img} alt="${product.name}">
+                    <h1>${product.name}</h1>
+                    <p class="tacgia">${product.tacgia}</p>
+                    <p class="category">${product.category}</p>
+                    <p class="price">${product.price}</p>
+                    <p class="quantity">${product.quantity}</p>
+                    <p class="status">${product.status}</p>
+                    <p><button>Đọc ngay</button></p>
+                </div>`;
+                    card.id = product.id;
+                    listCard.innerHTML += card;
+                }
+
+            }
+        }
+
+        createCard();
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const productList = document.getElementById('product-list');
+            const productDetail = document.getElementById('product-detail');
+            const productTitle = document.getElementById('product-title');
+            const backBtn = document.getElementById('back-btn');
+
+            function showProductDetail(productId) {
+                productList.style.display = 'none';
+                productDetail.style.display = 'block';
+                productTitle.textContent = `Product Detail for Product ${productId}`;
+            }
+        });
+
+        let cards = document.querySelectorAll('.card');
+        cards.forEach(card => {
+            card.addEventListener('click', function () {
+                let id = this.id;
+                window.location.href = `file:///C:/khoa%203/product.html?id=${id}`;
+            });
+        });
+    </script>
+</body>
+
+</html>

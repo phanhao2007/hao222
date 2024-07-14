@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+}
+
+#product-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.product {
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+#product-detail {
+    display: none;
+}
+
+#back-btn {
+    margin-bottom: 20px;
+}
+
+    </style>
+</head>
+<body>
+    <div id="product-list">
+        <div class="product" data-id="1">Product 1</div>
+        <div class="product" data-id="2">Product 2</div>
+        <div class="product" data-id="3">Product 3</div>
+    </div>
+
+    <div id="product-detail" style="display: none;">
+        <button id="back-btn">Back</button>
+        <h1 id="product-title"></h1>
+    </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    const productList = document.getElementById('product-list');
+    const productDetail = document.getElementById('product-detail');
+    const productTitle = document.getElementById('product-title');
+    const backBtn = document.getElementById('back-btn');
+
+    productList.addEventListener('click', function(event) {
+        if (event.target.classList.contains('product')) {
+            const productId = event.target.getAttribute('data-id');
+            showProductDetail(productId);
+        }
+    });
+
+    backBtn.addEventListener('click', function() {
+        productDetail.style.display = 'none';
+        productList.style.display = 'block';
+    });
+
+    function showProductDetail(productId) {
+        productList.style.display = 'none';
+        productDetail.style.display = 'block';
+        productTitle.textContent = `Product Detail for Product ${productId}`;
+    }
+});
+
+</script>
+</body>
+</html>

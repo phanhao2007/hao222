@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Chủ Đọc Sách Lịch sử</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #444;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container {
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background-color: white;
+            border: 1px solid #ddd;
+            margin: 10px;
+            padding: 20px;
+            border-radius: 5px;
+            width: 200px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .card h1 {
+            font-size: 18px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+
+        .card .tacgia {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        #SaveProduct {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #SaveProduct:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Trang Chủ Đọc Sách Lịch sử</h1>
+    </header>
+    <nav>
+        <a href="index.html">Trang Chủ</a>
+        <a href="#">Thể Loại</a>
+        <a href="#">Tác Giả</a>
+        <a href="#">Liên Hệ</a>
+    </nav>
+    <div class="container" id="listCard"></div>
+    <button id="SaveProduct">Save</button>
+
+    <script>
+        const allProduct = [
+            {
+                id: "9",
+                name: "Lược Sử Thế Giới",
+                category: "lịch sử",
+                tacgia: "E. H. Gombrich",
+                price: "200",
+                quantity: "1",
+                status: "còn hàng",
+                img: "https://pibook.vn/upload/notice/sach-lich-su-nen-doc%20(3).jpg",
+                noidung:["Lược Sử Thế Giới là một cuốn sách nổi bật, cung cấp cái nhìn tổng quan và súc tích về lịch sử loài người từ khởi nguồn đến thời hiện đại. Cuốn sách này do nhà sử học và tác giả Jeremy Black chấp bút, là một tác phẩm mang tính giáo dục cao, giúp người đọc hiểu rõ hơn về quá trình phát triển và tiến hóa của nhân loại qua các thời kỳ lịch sử khác nhau.Cuốn sách được chia thành nhiều chương, mỗi chương tập trung vào một giai đoạn lịch sử quan trọng, từ thời kỳ tiền sử, sự xuất hiện của các nền văn minh cổ đại, sự phát triển của các đế chế lớn, đến thời kỳ Trung Cổ, Phục Hưng và cuối cùng là thời hiện đại. Mỗi giai đoạn được trình bày một cách chi tiết, kèm theo các sự kiện, nhân vật và những bước ngoặt quan trọng đã hình thành nên thế giới ngày nay.","Jeremy Black sử dụng ngôn ngữ dễ hiểu và phong cách viết lôi cuốn để giúp người đọc không chỉ tiếp thu kiến thức lịch sử mà còn cảm nhận được sự hấp dẫn và sống động của từng thời kỳ. Các bản đồ, hình ảnh minh họa và biểu đồ trong sách cũng góp phần làm tăng thêm tính trực quan và sinh động, giúp người đọc dễ dàng hình dung và nắm bắt thông tin."]
+            },
+            {
+                id: "10",
+                name: "Súng, Vi Trùng Và Thép",
+                category: "lịch sử",
+                tacgia: "Jared Diamond",
+                price: "200",
+                quantity: "5",
+                status: "còn hàng",
+                img: "https://pibook.vn/upload/notice/sung-vi-trung-va-thep-5.jpg",
+                noidung:["bắt đầu với việc phân tích các yếu tố cơ bản quyết định sự phát triển của các nền văn minh khác nhau trên thế giới. Jared Diamond đặt ra câu hỏi: tại sao một số nền văn minh phát triển nhanh chóng và mạnh mẽ trong khi những nền văn minh khác lại phải chịu đựng sự suy tàn và thậm chí tuyệt chủng?","Tác giả phân tích vai trò của môi trường tự nhiên trong sự phát triển văn minh. Những điều kiện địa lý, khí hậu và tài nguyên tự nhiên ảnh hưởng rất lớn đến khả năng của các nền văn minh trong việc phát triển nông nghiệp, chế tạo công cụ, và xây dựng nền tảng cho sự văn minh và phát triển kinh tế.","Cuốn sách tiếp tục phân tích các đột phá công nghệ quan trọng như súng, vi trùng và thép. Jared Diamond lần lượt giải thích vai trò của từng yếu tố này trong sự phát triển và thăng tiến của các nền văn minh, từ việc sử dụng súng như một công cụ chiến tranh và chinh phục, cho đến sự ảnh hưởng của vi trùng trong lịch sử dân số và sự phát triển y tế, cũng như vai trò quyết định của thép trong xây dựng cơ sở hạ tầng và công nghiệp.","Cuối cùng, cuốn sách đặt ra câu hỏi về những hậu quả không ngờ của sự phát triển của súng, vi trùng và thép đối với các nền văn minh và xã hội. Sự phụ thuộc quá mức vào các công nghệ này đã góp phần đưa đến sự suy tàn của một số nền văn minh và gây ra những thách thức môi trường và xã hội lớn."]
+            },
+            {
+                id: "11",
+                name: "Lịch Sử Do Thái",
+                category: "lịch sử",
+                tacgia: "Paul Johnson",
+                price: "200",
+                quantity: "2",
+                status: "còn hàng",
+                img: "https://pibook.vn/upload/notice/lich-su-do-thai2_grso.jpg",
+            },
+            {
+                id: "12",
+                name: "Lịch Sử Chiến Tranh",
+                category: "lịch sử",
+                tacgia: "John Keegan",
+                price: "200",
+                quantity: "2",
+                status: "còn hàng",
+                img: "https://pibook.vn/upload/notice/sach-lich-su-nen-doc%20(2).jpg",
+            }
+        ];
+
+        let Save = document.getElementById("SaveProduct");
+        Save.addEventListener("click", function () {
+            let product=JSON.parse(localStorage.getItem("product"));
+            let products=[...product,...allProduct];
+            localStorage.setItem("product", JSON.stringify(products));
+            alert("Lưu thành công");
+        });
+
+        function createCard() {
+            let allProduct = JSON.parse(localStorage.getItem("product"));
+            let listCard = document.getElementById("listCard");
+            for (let i = 0; i < allProduct.length; i++) {
+                let product = allProduct[i];
+                if (product.category == "lịch sử") {
+                    let card = `
+                <div class="card" id=${product.id}>
+                    <img src=${product.img} alt="${product.name}">
+                    <h1>${product.name}</h1>
+                    <p class="tacgia">${product.tacgia}</p>
+                    <p class="category">${product.category}</p>
+                    <p class="price">${product.price}</p>
+                    <p class="quantity">${product.quantity}</p>
+                    <p class="status">${product.status}</p>
+                    <p><button>Đọc ngay</button></p>
+                </div>`;
+                    card.id = product.id;
+                    listCard.innerHTML += card;
+                }
+
+            }
+        }
+
+        createCard();
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const productList = document.getElementById('product-list');
+            const productDetail = document.getElementById('product-detail');
+            const productTitle = document.getElementById('product-title');
+            const backBtn = document.getElementById('back-btn');
+
+            function showProductDetail(productId) {
+                productList.style.display = 'none';
+                productDetail.style.display = 'block';
+                productTitle.textContent = `Product Detail for Product ${productId}`;
+            }
+        });
+
+        let cards = document.querySelectorAll('.card');
+        cards.forEach(card => {
+            card.addEventListener('click', function () {
+                let id = this.id;
+                window.location.href = `file:///C:/khoa%203/product.html?id=${id}`;
+            });
+        });
+    </script>
+</body>
+
+</html>

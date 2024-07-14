@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giao Diện Đọc Sách</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: fixed;
+            height: 100%;
+        }
+
+        .sidebar .logo {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin: 10px 0;
+        }
+
+        .sidebar ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            display: block;
+            padding: 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #555;
+        }
+
+        .sidebar .footer {
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .content {
+            flex: 1;
+            padding: 20px;
+            margin-left: 250px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .book-header {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .book-header h1 {
+            margin: 0;
+            font-size: 28px;
+            color: #333;
+        }
+
+        .book-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            line-height: 1.6;
+            font-size: 18px;
+            max-width: 800px;
+            width: 100%;
+            overflow-y: auto;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .controls button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .controls button:hover {
+            background-color: #555;
+        }
+
+        .next-chapter-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+
+        .next-chapter-button:hover {
+            background-color: #45a049;
+        }
+
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 200px;
+            }
+
+            .content {
+                margin-left: 200px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+
+            .content {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            .book-header h1 {
+                font-size: 24px;
+            }
+
+            .book-content {
+                font-size: 16px;
+            }
+
+            .controls button {
+                padding: 8px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="logo">Thư Viện</div>
+        <ul>
+            <li><a href="#" onclick="changeChapter(0)">Chương 1</a></li>
+            <li><a href="#" onclick="changeChapter(1)">Chương 2</a></li>
+            <li><a href="#" onclick="changeChapter(2)">Chương 3</a></li>
+            <li><a href="#" onclick="changeChapter(3)">Chương 4</a></li>
+            <!-- Thêm các mục chương khác cần thiết -->
+        </ul>
+        <div class="footer">
+            &copy; 2024 Thư Viện. Bản quyền thuộc về tác giả.
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="book-header">
+            <h1>Chương 1: Tên Sách</h1>
+        </div>
+        <div class="book-content" id="bookContent">
+            <!-- Các đoạn văn của các chương -->
+        </div>
+        <div class="controls">
+            <button id="increaseFont">Tăng cỡ chữ</button>
+            <button id="decreaseFont">Giảm cỡ chữ</button>
+        </div>
+    </div>
+
+    <button class="next-chapter-button" id="nextChapterButton">></button>
+
+    <script>
+        // Mảng các đoạn văn tương ứng với từng chương
+        let chapters = [
+            `<p>Đoạn văn của Chương 1</p>`,
+            `<p>Đoạn văn của Chương 2</p>`,
+            `<p>Đoạn văn của Chương 3</p>`,
+            `<p>Đoạn văn của Chương 4</p>`
+            // Thêm các đoạn văn khác nếu cần thiết
+        ];
+
+        // Chương hiện tại
+        let currentChapter = 0;
+
+        // Function để thay đổi nội dung khi chuyển chương
+        function changeChapter(index) {
+            if (index >= 0 && index < chapters.length) {
+                currentChapter = index;
+                const bookContent = document.getElementById('bookContent');
+                bookContent.innerHTML = chapters[index];
+                document.querySelectorAll('.sidebar ul li a').forEach((item, idx) => {
+                    if (idx === index) {
+                        item.classList.add('active');
+                    } else {
+                        item.classList.remove('active');
+                    }
+                });
+                // Cập nhật tiêu đề chương
+                document.querySelector('.book-header h1').innerText = `Chương ${index + 1}: Tên Sách`;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mặc định hiển thị chương đầu tiên khi tải trang
+            changeChapter(0);
+            const urlparams = new URLSearchParams(window.location.search);
+            const id = urlparams.get("id");
+
+            const allProduct = JSON.parse(window.localStorage.getItem("product"));
+            let product = allProduct.find(item => item.id === id);
+
+            if (product) {
+                console.log(product);
+                chapters = product.noidung;
+            } else {
+                console.error("Product not found");
+            }
+            const increaseFontBtn = document.getElementById('increaseFont');
+            const decreaseFontBtn = document.getElementById('decreaseFont');
+            const nextChapterButton = document.getElementById('nextChapterButton');
+
+            let currentFontSize = 18;
+
+            increaseFontBtn.addEventListener('click', () => {
+                currentFontSize += 2;
+                document.getElementById('bookContent').style.fontSize = `${currentFontSize}px`;
+            });
+
+            decreaseFontBtn.addEventListener('click', () => {
+                if (currentFontSize > 14) {
+                    currentFontSize -= 2;
+                    document.getElementById('bookContent').style.fontSize = `${currentFontSize}px`;
+                }
+            });
+
+            // Sự kiện click cho nút chuyển chương
+            nextChapterButton.addEventListener('click', () => {
+                if (currentChapter < chapters.length - 1) {
+                    changeChapter(currentChapter + 1);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết Sản phẩm - Sách</title>
+    <link rel="stylesheet" href="product.css">
+</head>
+<body>
+    <div class="product-detail">
+        <div class="product-image">
+            <img src="book-cover.jpg" id="hinhanh" alt="Book Cover">
+        </div>
+        <div class="product-info">
+            <h1 class="product-title" id="name">Tên Sách</h1>
+            <p class="product-author" id="tacgia">Tác giả: John Doe</p>
+            <p class="product-price" id="price">giá</p>
+            <p class="product-description" id="danhgia">
+                Đây là mô tả về cuốn sách. Cuốn sách này bao gồm những thông tin chi tiết và thú vị về chủ đề XYZ. Rất phù hợp cho những ai yêu thích đọc sách và tìm hiểu về XYZ.
+            </p>
+            <div class="product-reviews">
+                <h3>Đánh giá:</h3>
+                <ul>
+                    <li>★★★★★ - Tuyệt vời!</li>
+                    <li>★★★★☆ - Rất tốt</li>
+                    <li>★★★☆☆ - Khá tốt</li>
+                </ul>
+            </div>
+            <button class="buy-button" id="read-now-button">Đọc ngay</button>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const urlparams = new URLSearchParams(window.location.search);
+            const id = urlparams.get("id");
+
+            const allProduct = JSON.parse(window.localStorage.getItem("product"));
+            let product = allProduct.find(item => item.id === id);
+            
+            if (product) {
+                document.getElementById("name").innerText = product.name;
+                document.getElementById("tacgia").innerText = `Tác giả: ${product.tacgia}`;
+                document.getElementById("price").innerText = product.price;
+                document.getElementById("danhgia").innerText = product.danhgia;
+                document.getElementById("hinhanh").setAttribute("src", product.img);
+
+                document.getElementById("read-now-button").addEventListener("click", () => {
+                    window.location.href = `docsach.html?id=${id}`;
+                });
+            } else {
+                console.error("Product not found");
+            }
+        });
+    </script>
+</body>
+</html>

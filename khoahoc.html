@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Chủ Đọc Sách Khoa học</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #444;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container {
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background-color: white;
+            border: 1px solid #ddd;
+            margin: 10px;
+            padding: 20px;
+            border-radius: 5px;
+            width: 200px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .card h1 {
+            font-size: 18px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+
+        .card .tacgia {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        #SaveProduct {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #SaveProduct:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Trang Chủ Đọc Sách Khoa học</h1>
+    </header>
+    <nav>
+        <a href="index.html">Trang Chủ</a>
+        <a href="#">Thể Loại</a>
+        <a href="#">Tác Giả</a>
+        <a href="#">Liên Hệ</a>
+    </nav>
+    <div class="container" id="listCard"></div>
+    <button id="SaveProduct">Save</button>
+
+    <script>
+        const allProduct = [
+            {
+                id: "5",
+                name: "CUỘC CHIẾN LỖ ĐEN",
+                category: "khoa học",
+                tacgia: "Leonard Susski",
+                price: "200",
+                quantity: "1",
+                status: "còn hàng",
+                img: "https://newshop.vn/public/uploads/content/khoa-hoc-kham-pha-cuoc-chien-lo-den-min.jpg",
+                noidung: ["Vũ trụ bao la với những bí ẩn chưa từng được khám phá. Trong một hệ hành tinh xa xôi, Trái Đất đang đối mặt với một nguy cơ khôn lường - một lỗ đen khổng lồ đang tiến gần, đe dọa nuốt chửng tất cả.Nhóm các nhà khoa học tại Đài Thiên Văn Vũ Trụ Quốc Tế (IVSO) phát hiện ra sự tồn tại của lỗ đen này. Họ nhanh chóng nhận ra rằng, nếu không có biện pháp kịp thời, Trái Đất sẽ bị hủy diệt trong vòng 10 năm.Các nhà lãnh đạo thế giới tổ chức một hội nghị khẩn cấp tại Liên Hợp Quốc. Tiến sĩ Lê Minh, nhà vật lý thiên văn hàng đầu, được giao nhiệm vụ đứng đầu dự án nghiên cứu và ngăn chặn lỗ đen.","Tiến sĩ Minh cùng với đội ngũ gồm những nhà khoa học tài ba nhất từ khắp nơi trên thế giới bắt đầu cuộc hành trình vào không gian. Họ sử dụng con tàu vũ trụ tiên tiến nhất, VNS-Hope, để tiếp cận lỗ đen và tìm cách thay đổi quỹ đạo của nó.Trong quá trình tiếp cận lỗ đen, đội ngũ gặp phải vô số thử thách: bức xạ vũ trụ, sự mất ổn định của con tàu, và những hiện tượng kỳ lạ chưa từng thấy. Tinh thần đồng đội và kiến thức khoa học là những gì giúp họ vượt qua mọi khó khăn.Để thực hiện được kế hoạch, một số thành viên trong đội buộc phải hy sinh. Những mất mát này không chỉ thử thách lòng can đảm mà còn khơi dậy ý chí quyết tâm trong mỗi thành viên còn lại.","Trong quá trình nghiên cứu, họ phát hiện ra rằng lỗ đen này không phải là một hiện tượng tự nhiên. Nó được tạo ra bởi một nền văn minh ngoài hành tinh xa xôi, với mục đích tiêu diệt những hành tinh có khả năng đe dọa sự tồn tại của họ.Tiến sĩ Minh quyết định liên lạc với nền văn minh ngoài hành tinh để tìm kiếm một giải pháp hòa bình. Cuộc đối thoại giữa hai nền văn minh dẫn đến sự thành lập một liên minh vũ trụ mới, với mục tiêu bảo vệ và hợp tác vì hòa bình."]
+            },
+            {
+                id: "6",
+                name: "6 PHÁT MINH LÀM NÊN THỜI ĐẠI",
+                category: "khoa học",
+                tacgia: "Steven Johnson",
+                price: "200",
+                quantity: "5",
+                status: "còn hàng",
+                img: "https://newshop.vn/public/uploads/content/tri-thuc-ve-van-vat-mot-the-gioi-truc-quan-chua-tung-thay-min.jpg",
+                noidung:["Giới thiệuBánh xe là một trong những phát minh cổ xưa nhất của loài người. Nó đã mở ra những khả năng mới trong việc di chuyển, vận chuyển hàng hóa và thậm chí là trong các cỗ máy phức tạp.Nội dungLịch sử phát minh: Bánh xe xuất hiện lần đầu tiên khoảng 3500 năm trước Công nguyên ở Lưỡng Hà.Cách thức hoạt động: Cấu trúc đơn giản nhưng hiệu quả của bánh xe đã tạo nên sự chuyển đổi lớn trong việc di chuyển và vận chuyển hàng hóa.Ứng dụng trong đời sống: Từ xe kéo thời cổ đại đến xe ô tô hiện đại, bánh xe đã không ngừng phát triển và được cải tiến.","Máy In , phát minh bởi Johannes Gutenberg vào thế kỷ 15, đã cách mạng hóa việc truyền tải thông tin và kiến thức.Lịch sử phát minh: Johannes Gutenberg và sự ra đời của máy in di động năm 1440.Tầm quan trọng: Máy in đã làm cho sách vở trở nên phổ biến, giảm chi phí sản xuất và mở ra kỷ nguyên của sự phát triển tri thức.Ảnh hưởng xã hội: Sự phổ biến của sách in đã thúc đẩy phong trào Phục Hưng và Cách mạng Khoa học.","Động cơ hơi nước là một phát minh mang tính cách mạng trong thời kỳ Cách mạng Công nghiệp, thay đổi cách thức sản xuất và vận chuyển.Lịch sử phát minh: Từ những cải tiến ban đầu của Thomas Newcomen đến động cơ hiệu quả của James Watt.Cơ chế hoạt động: Nguyên lý hoạt động của động cơ hơi nước và sự biến đổi năng lượng nhiệt thành cơ năng.Ứng dụng và ảnh hưởng: Tàu hỏa, tàu thủy và máy móc công nghiệp đều được cải tiến nhờ động cơ hơi nước.","Bóng đèn điện, phát minh bởi Thomas Edison và các nhà khoa học khác, đã làm thay đổi cách chúng ta sống và làm việc.Lịch sử phát minh: Sự đóng góp của các nhà khoa học như Thomas Edison, Joseph Swan trong việc phát triển bóng đèn điện.Nguyên lý hoạt động: Cách thức hoạt động của bóng đèn sợi đốt và các loại bóng đèn hiện đại.Tác động đến đời sống: Sự thay đổi lớn lao trong sinh hoạt hàng ngày và sản xuất công nghiệp nhờ ánh sáng điện."]
+            },
+            {
+                id: "7",
+                name: "NGUỒN GỐC CÁC LOÀI",
+                category: "khoa học",
+                tacgia: "Sabina Radeva",
+                price: "200",
+                quantity: "2",
+                status: "còn hàng",
+                img: "https://newshop.vn/public/uploads/content/6-phat-minh-lam-nen-thoi-dai-min.jpg",
+                noidung:["Trong chương này, Darwin giải thích rằng biến dị là cơ sở của sự tiến hóa. Ông trình bày các ví dụ về biến dị ở thực vật và động vật dưới tác động của con người thông qua quá trình nuôi trồng và lai giống.","Darwin miêu tả sự cạnh tranh giữa các cá thể trong tự nhiên để tồn tại và sinh sản. Ông nhấn mạnh rằng chỉ có những cá thể thích nghi tốt nhất với môi trường mới có cơ hội sống sót và truyền lại đặc điểm của mình cho thế hệ sau.","Chương này giải thích chi tiết về khái niệm chọn lọc tự nhiên. Darwin trình bày rằng qua nhiều thế hệ, các đặc điểm có lợi sẽ được duy trì và tăng cường trong quần thể, trong khi các đặc điểm không có lợi sẽ dần bị loại bỏ."]
+            },
+            {
+                id: "8",
+                name: "LƯỢC SỬ VỀ LOÀI NGƯỜI",
+                category: "khoa học",
+                tacgia: " Bill Gates",
+                price: "200",
+                quantity: "2",
+                status: "còn hàng",
+                img: "https://newshop.vn/public/uploads/content/jpg5fd319971f7f0.jpg",
+                noidung:["Khoảng 70.000 năm trước, loài người đã trải qua một cuộc cách mạng nhận thức đột phá. Đây là thời điểm mà khả năng tưởng tượng, ngôn ngữ và trao đổi thông tin phát triển mạnh mẽ. Nhờ vào những sáng tạo này, con người đã có thể xây dựng các nền văn minh phức tạp và khác biệt so với những loài động vật khác.","Homo sapiens, hay con người hiện đại, đã di cư ra khỏi châu Phi khoảng 60.000 năm trước và lan tỏa khắp thế giới. Sự thích nghi linh hoạt và khả năng đổi mới về công cụ, kỹ thuật săn bắt và vật nuôi đã giúp loài người thích ứng và sinh tồn trong nhiều môi trường khác nhau trên trái đất.","Sự ra đời của nông nghiệp khoảng 12.000 năm trước đã làm thay đổi toàn bộ cách sống của loài người. Nông nghiệp mang lại nguồn thực phẩm ổn định và làm nảy sinh các nền văn minh đầu tiên. Tuy nhiên, nó cũng gây ra những thay đổi xã hội sâu sắc và ảnh hưởng đến môi trường tự nhiên.Với sự phát triển của các thành phố và định cư đô thị, con người đã tạo ra những trung tâm văn hóa, kinh tế và chính trị. Các nền văn minh như Mesopotamia, Ai Cập cổ đại và Đế chế La Mã đã khai phá và phát triển các kỹ thuật, nghệ thuật và tri thức, đánh dấu sự tiến bộ vượt bậc của loài người.","Thế kỷ 18 và 19 chứng kiến sự bùng nổ của cách mạng công nghiệp, với sự phát triển của công nghệ, khoa học và sản xuất công nghiệp. Công nghiệp hóa đã thay đổi cách thức sản xuất và cuộc sống của con người, mở ra một thế giới mới với các phát minh, cuộc cách mạng xã hội và các vấn đề xã hội mới."]
+            }
+        ];
+
+        let Save = document.getElementById("SaveProduct");
+        Save.addEventListener("click", function () {
+            let product=JSON.parse(localStorage.getItem("product"));
+            let products=[...product,...allProduct];
+            localStorage.setItem("product", JSON.stringify(products));
+            alert("Lưu thành công");
+        });
+
+        function createCard() {
+            let allProduct = JSON.parse(localStorage.getItem("product"));
+            let listCard = document.getElementById("listCard");
+            for (let i = 0; i < allProduct.length; i++) {
+                let product = allProduct[i];
+                if (product.category == "khoa học") {
+                    let card = `
+                <div class="card" id=${product.id}>
+                    <img src=${product.img} alt="${product.name}">
+                    <h1>${product.name}</h1>
+                    <p class="tacgia">${product.tacgia}</p>
+                    <p class="category">${product.category}</p>
+                    <p class="price">${product.price}</p>
+                    <p class="quantity">${product.quantity}</p>
+                    <p class="status">${product.status}</p>
+                    <p><button>Đọc ngay</button></p>
+                </div>`;
+                    card.id = product.id;
+                    listCard.innerHTML += card;
+                }
+
+            }
+        }
+
+        createCard();
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const productList = document.getElementById('product-list');
+            const productDetail = document.getElementById('product-detail');
+            const productTitle = document.getElementById('product-title');
+            const backBtn = document.getElementById('back-btn');
+
+            function showProductDetail(productId) {
+                productList.style.display = 'none';
+                productDetail.style.display = 'block';
+                productTitle.textContent = `Product Detail for Product ${productId}`;
+            }
+        });
+
+        let cards = document.querySelectorAll('.card');
+        cards.forEach(card => {
+            card.addEventListener('click', function () {
+                let id = this.id;
+                window.location.href = `file:///C:/khoa%203/product.html?id=${id}`;
+            });
+        });
+    </script>
+</body>
+
+</html>
