@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cảm Nhận Sau Khi Đọc Sách</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #4CAF50;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+        }
+
+        .form-group textarea {
+            height: 100px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        .review-list {
+            margin-top: 20px;
+        }
+
+        .review-item {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .review-item:last-child {
+            border-bottom: none;
+        }
+
+        .review-item h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .review-item p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Bình Luận Sau Khi Đọc Sách</h1>
+        <div class="form-group">
+            <label for="bookTitle">Tên Sách</label>
+            <input type="text" id="bookTitle" placeholder="Nhập tên sách">
+        </div>
+        <div class="form-group">
+            <label for="reviewText">Cảm Nhận</label>
+            <textarea id="reviewText" placeholder="Nhập cảm nhận của bạn"></textarea>
+        </div>
+        <button class="btn" id="submitReview">Gửi Cảm Nhận</button>
+        <div class="review-list" id="reviewList">
+            <!-- Các cảm nhận sẽ được hiển thị ở đây -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const submitReviewButton = document.getElementById('submitReview');
+            const reviewList = document.getElementById('reviewList');
+            const bookTitleInput = document.getElementById('bookTitle');
+            const reviewTextInput = document.getElementById('reviewText');
+
+            // Function to render reviews from Local Storage
+            function renderReviews() {
+                const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+                reviewList.innerHTML = reviews.map(review => `
+                    <div class="review-item">
+                        <h3>${review.title}</h3>
+                        <p>${review.text}</p>
+                    </div>
+                `).join('');
+            }
+
+            // Event listener for the submit button
+            submitReviewButton.addEventListener('click', () => {
+                const title = bookTitleInput.value.trim();
+                const text = reviewTextInput.value.trim();
+
+                if (title && text) {
+                    const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+                    reviews.push({ title, text });
+                    localStorage.setItem('reviews', JSON.stringify(reviews));
+                    bookTitleInput.value = '';
+                    reviewTextInput.value = '';
+                    renderReviews();
+                } else {
+                    alert('Vui lòng nhập cả tên sách và cảm nhận.');
+                }
+            });
+
+            // Initial render of reviews
+            renderReviews();
+        });
+    </script>
+</body>
+
+</html>

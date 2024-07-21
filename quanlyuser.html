@@ -147,9 +147,9 @@
     <nav class="navbar">
         <a href="#" class="navbar-logo">Quản lý Người dùng</a>
         <ul class="navbar-menu">
-            <li><a href="#home">Trang Chủ</a></li>
-            <li><a href="#users">Người Dùng</a></li>
-            <li><a href="#add-user">Thêm Người Dùng</a></li>
+            <li><a href="./index.html">Trang Chủ</a></li>
+            <li><a href="./quanlyuser.html">Quản lý Người Dùng</a></li>
+            <li><a href="./quanly3.html">Quản lý sản phẩm </a></li>
             <li><a href="#settings">Cài Đặt</a></li>
         </ul>
     </nav>
@@ -159,7 +159,9 @@
             <h1>Chào Mừng Đến Với Quản Lý Người Dùng</h1>
             <p>Quản lý người dùng của bạn một cách hiệu quả và chuyên nghiệp.</p>
         </section>
-
+        <div class="actions">
+            <button id="addProductBtn">+Sửa người dùng</button>
+        </div>
         <section id="users" class="users-section">
             <h2>Danh Sách Người Dùng</h2>
             <table class="user-table">
@@ -177,21 +179,48 @@
                     <!-- User rows will be populated here -->
                 </tbody>
             </table>
-
+            <!-- Modal để thêm/sửa sản phẩm -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Thêm/Sửa sản phẩm</h2>
+            <form id="userForm">
+                <label for="productId">Mã Người Dùng:</label>
+                <input type="text" id="userId" disabled name="userId" required>
+                <label for="productName">Tên Người dùng:</label>
+                <input type="text" id="userName" name="userName" required>
+                <label for="productCategory">Email:</label>
+                <input type="text" id="userEmail" name="userEmail" required>
+                <label for="productQuantity">Số Điện thoại :</label>
+                <input type="number" id="userPhone" name="userPhone" required>
+                <label for="productName">Năm sinh:</label>
+                <input type="text" id="userYear" name="userYear" required>
+                <label for="productName">Mật khẩu:</label>
+                <input type="text" id="userPassword" name="userPassword" required>
+                <label for="productName">Quyền hạn:</label>
+                <input type="text" id="userRole" name="userRole" required>
+                <button type="submit">Lưu</button>
+            </form>
+        </div>
+    </div>
     <footer class="footer">
         <p>&copy; 2024 Quản lý Người dùng. Bảo lưu mọi quyền.</p>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+            if(currentUser.role!=="admin")
+            {
+                window.location.href="./index.html";
+            }
             const userList = document.getElementById('user-list');
             const addUserForm = document.getElementById('add-user-form');
             const productTableBody = document.getElementById('productTableBody');
             let products = JSON.parse(localStorage.getItem("users"));
-            console.log(products);
-          
-                function renderProducts() {
-                    products.forEach((product, index) => {
+            //console.log(products);
+            function renderProducts() {
+                products.forEach((product, index) => {
                     const row = document.createElement('tr');
                     row.innerHTML = `
                         <td>${product.id}</td>
@@ -200,13 +229,59 @@
                         <td>${product.phone}</td>
                         <td>${product.dob}</td>
                         <td>
+                            <button onclick="editUser(${index})">Sửa</button>
                             <button onclick="deleteUser(${index})">Xóa</button>
                         </td>
                     `;
                     productTableBody.appendChild(row);
                 });
             }
-            renderProducts()
+            productModal.style.display = 'none';
+            addProductBtn.addEventListener('click', () => {
+                userForm.reset();
+                productModal.style.display = 'flex';
+            });
+            renderProducts();
+            userForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const user = {
+                    id: userForm.userId.value,
+                    name: userForm.userName.value,
+                    email: userForm.userEmail.value,
+                    password: userForm.userPhone.value,
+                    phone: userForm.userYear.value,
+                    dob: userForm.userYear.value,
+                    role: userForm.userRole.value
+                };
+                products.forEach((productitem, index) => {
+                    console.log(user.id," ",productitem.id);
+                    if(user.id.toString()===productitem.id.toString())
+                    {
+                        productitem.id=user.id;
+                        productitem.name=user.name;
+                        productitem.email=user.email;
+                        productitem.password=user.password;
+                        productitem.phone=user.phone;
+                        productitem.dob=user.dob;
+                        productitem.role=user.role;
+                        localStorage.setItem("users",JSON.stringify(products));
+                        alert("Cập nhật dữ liệu thành công");
+                        productModal.style.display = 'none';
+                        checkUpdate=true;
+                        return;
+                    }
+                })
+            });
+            window.editUser = function(index) {
+                const user = products[index];
+                userForm.userId.value = user.id;
+                userForm.userName.value = user.name;
+                userForm.userEmail.value = user.email;
+                userForm.userPhone.value = user.phone;
+                userForm.userYear.value = user.dob;
+                userForm.userPassword.value = user.password;
+                userForm.userRole.value = user.role;
+            };
             window.deleteUser = function(index) {
                 products.splice(index, 1);
                 localStorage.setItem("users",JSON.stringify(products));

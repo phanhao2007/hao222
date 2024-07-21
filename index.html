@@ -115,11 +115,14 @@
     </header>
     <nav>
         <a href="#">Trang chủ</a>
-        <a href="#">Giới thiệu</a>
-        <a href="#">Thể loại sách</a>
-        <a href="#">Bài viết</a>
-        <a href="quanly3.html">Quản lý người dùng</a>
+        <a href="gioithieu.html">Giới thiệu</a>
+        <a href="#book-categories">Thể loại sách</a>
+        <a href="baiviet.html">Bài viết</a>
         <a href="quanlyuser.html">Admin</a>
+        <a href="./login.html" id="login">Login</a>
+        <a href="./dangky.html" id="logup">Logup</a>
+        <a href="./index.html" id="nameuser"></a>
+        <a href="./login.html" id="loguot" onclick="Dangxuat()">Đăng xuất</a>
     </nav>
     <div class="search-bar">
         <form action="/search" method="get">
@@ -130,12 +133,7 @@
     </div>
 
     <div class="content">
-        <div class="section">
-            <h2>Giới thiệu</h2>
-            <p>Thư viện kỳ diệu ra đời với sứ mệnh mang đến cho người yêu sách những trải nghiệm tuyệt vời nhất. Chúng tôi cung cấp những bài đánh giá sách chuyên sâu, những gợi ý đọc sách và cập nhật thông tin về sách mới nhất.</p>
-        </div>
-
-        <div class="section">
+        <div class="section" id="book-categories">
             <h2>Thể loại Sách</h2>
             <div class="books">
                 <div class="book">
@@ -176,6 +174,24 @@
                 <div class="review">
                     <p>"Một câu chuyện cảm động và sâu sắc..." - Quang Huy</p>
                 </div>
+                <div class="review">
+                    <p>"Rất khuyến khích cho bất kỳ ai yêu thích thể loại này. Thực sự đáng đọc!" - Lan Anh</p>
+                </div>
+                <div class="review">
+                    <p>"Sách rất thú vị và bổ ích. Tôi đã học được nhiều điều từ nó." - Tuan Anh</p>
+                </div>
+                <div class="review">
+                    <p>"Chất lượng viết lách tuyệt vời và nội dung rất có chiều sâu." - Thanh Mai</p>
+                </div>
+                <div class="review">
+                    <p>"Một tác phẩm tuyệt vời, tôi không thể ngừng đọc!" - Minh Tuấn</p>
+                </div>
+                <div class="review">
+                    <p>"Câu chuyện hấp dẫn và mang lại nhiều suy ngẫm." - Thuy Linh</p>
+                </div>
+                <div class="review">
+                    <p>"Tôi rất ấn tượng với cách tác giả xử lý chủ đề này. Đọc xong cảm thấy rất mãn nguyện." - Thanh Thảo</p>
+                </div>
                 <!-- Thêm các đánh giá khác tại đây -->
             </div>
         </div>
@@ -191,9 +207,22 @@
         <p>&copy; 2024 Yêu Sách. Mọi quyền được bảo lưu.</p>
     </footer>
     <script>
+        const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+        if (currentUser) {
+            document.getElementById("login").style.display = "none";
+            document.getElementById("logup").style.display = "none";
+            document.getElementById("nameuser").innerText = currentUser.name;
+        } else {
+            document.getElementById("nameuser").style.display = "none";
+            document.getElementById("loguot").style.display = "none";
+        }
+        function Dangxuat() {
+            localStorage.removeItem("currentUser");
+        }
+
         // Sample data to simulate localStorage data
-        const sampleProducts = ["chủ nhân của những chiếc nhẩn", "CUỘC CHIẾN LỖ ĐEN", "Lịch Sử Chiến Tranh", "6 PHÁT MINH LÀM NÊN THỜI ĐẠI ", "Nhà Giả Kim"];
-        localStorage.setItem('products', JSON.stringify(sampleProducts));4
+        const sampleProducts = ["chủ nhân của những chiếc nhẫn", "CUỘC CHIẾN LỖ ĐEN", "Lịch Sử Chiến Tranh", "6 PHÁT MINH LÀM NÊN THỜI ĐẠI", "Nhà Giả Kim"];
+        localStorage.setItem('products', JSON.stringify(sampleProducts));
 
         // Fetch products from localStorage
         const products = JSON.parse(localStorage.getItem('products')) || [];
@@ -201,7 +230,7 @@
         const searchInput = document.getElementById('search');
         const suggestionsContainer = document.getElementById('suggestions');
 
-        searchInput.addEventListener('input', function() {
+        searchInput.addEventListener('input', function () {
             const query = this.value.toLowerCase();
             suggestionsContainer.innerHTML = '';
             if (query) {
@@ -209,7 +238,7 @@
                 filteredProducts.forEach(product => {
                     const suggestion = document.createElement('p');
                     suggestion.textContent = product;
-                    suggestion.addEventListener('click', function() {
+                    suggestion.addEventListener('click', function () {
                         searchInput.value = product;
                         suggestionsContainer.innerHTML = '';
                     });
@@ -221,7 +250,7 @@
             }
         });
 
-        document.addEventListener('click', function(e) {
+        document.addEventListener('click', function (e) {
             if (!suggestionsContainer.contains(e.target) && e.target !== searchInput) {
                 suggestionsContainer.style.display = 'none';
             }

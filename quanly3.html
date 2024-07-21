@@ -163,16 +163,15 @@ margin-top: 10px;
     <div class="container">
         <nav class="sidebar">
             <div class="logo">
-                <h2>Logo</h2>
+                <h2 style="text-align: start;">Thư viện </h2>
+                <h2 style="text-align: end;">kỳ diệu</h2>
             </div>
-            <ul>
-                <li><a href="#" class="active">TRANG CHỦ</a></li>
-                <li><a href="#">Sản phẩm</a></li>
-                <li><a href="#">Đơn hàng</a></li>
-                <li><a href="#">Khách hàng</a></li>
-                <li><a href="#">Báo cáo</a></li>
-                <li><a href="#">Cài đặt</a></li>
-            </ul>
+            <ul class="navbar-menu">
+            <li><a href="./index.html">Trang Chủ</a></li>
+            <li><a href="./quanlyuser.html">Quản lý Người Dùng</a></li>
+            <li><a href="./quanly3.html">Quản lý sản phẩm </a></li>
+            <li><a href="#settings">Cài Đặt</a></li>
+        </ul>
         </nav>
         <div class="content">
             <header>
@@ -222,12 +221,13 @@ margin-top: 10px;
 
                 <label for="productCategory">Danh mục:</label>
                 <input type="text" id="productCategory" name="productCategory" required>
-<label for="productPrice">Giá:</label>
+                <label for="productPrice">Giá:</label>
                 <input type="number" id="productPrice" name="productPrice" required>
 
                 <label for="productQuantity">Số lượng:</label>
                 <input type="number" id="productQuantity" name="productQuantity" required>
-
+                <label for="productName">Link hình ảnh:</label>
+                <input type="text" id="productImg" name="productImg" required>
                 <label for="productStatus">Trạng thái:</label>
                 <select id="productStatus" name="productStatus">
                     <option value="Còn hàng">Còn hàng</option>
@@ -291,14 +291,16 @@ margin-top: 10px;
 
             productForm.addEventListener('submit', (event) => {
                 event.preventDefault();
-const product = {
+                const product = {
                     id: productForm.productId.value,
                     name: productForm.productName.value,
                     category: productForm.productCategory.value,
                     price: productForm.productPrice.value,
                     quantity: productForm.productQuantity.value,
+                    img: productForm.productImg.value,
                     status: productForm.productStatus.value
                 };
+                let checkUpdate=false;
                 products.forEach((productitem, index) => {
                     console.log(productitem.id);
                     if(product.id===productitem.id)
@@ -307,17 +309,22 @@ const product = {
                         productitem.category=product.category;
                         productitem.price=product.price;
                         productitem.quantity=product.quantity;
+                        productitem.img=product.img;
                         productitem.status=product.status;
                         localStorage.setItem("product",JSON.stringify(products));
                         alert("Cập nhật dữ liệu thành công");
                         productModal.style.display = 'none';
                         renderProducts();  
+                        checkUpdate=true;
                         return;
                     }
                 })
-                products.push(product);
-                productModal.style.display = 'none';
-                renderProducts();
+                if(checkUpdate===false)
+                {
+                    products.push(product);
+                    productModal.style.display = 'none';
+                    renderProducts();
+                }
             });
 
             function renderProducts() {
@@ -348,13 +355,14 @@ const product = {
                 productForm.productCategory.value = product.category;
                 productForm.productPrice.value = product.price;
                 productForm.productQuantity.value = product.quantity;
+                productForm.productImg.value=product.img;
                 productForm.productStatus.value = product.status;
                 productModal.style.display = 'flex';
             };
 
             window.deleteProduct = function(index) {
                 products.splice(index, 1);
-localStorage.setItem("product",JSON.stringify(products));
+                localStorage.setItem("product",JSON.stringify(products));
                 renderProducts();
             };
 

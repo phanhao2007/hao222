@@ -59,6 +59,19 @@
             background-color: #555;
         }
 
+        .sidebar ul li a.home-button {
+            background-color: #4CAF50; /* Green color */
+            font-weight: bold;
+        }
+
+        .sidebar ul li a.home-button:hover {
+            background-color: #45a049; /* Darker green */
+        }
+
+        .sidebar ul li a.active {
+            background-color: #555;
+        }
+
         .sidebar .footer {
             text-align: center;
             font-size: 14px;
@@ -183,6 +196,7 @@
     <div class="sidebar">
         <div class="logo">Thư Viện</div>
         <ul>
+            <li><a href="index.html" class="home-button active">Trang Chủ</a></li>
             <li><a href="#" onclick="changeChapter(0)">Chương 1</a></li>
             <li><a href="#" onclick="changeChapter(1)">Chương 2</a></li>
             <li><a href="#" onclick="changeChapter(2)">Chương 3</a></li>
@@ -229,7 +243,7 @@
                 const bookContent = document.getElementById('bookContent');
                 bookContent.innerHTML = chapters[index];
                 document.querySelectorAll('.sidebar ul li a').forEach((item, idx) => {
-                    if (idx === index) {
+                    if (idx === index + 1) { // +1 vì "Trang Chủ" là mục đầu tiên
                         item.classList.add('active');
                     } else {
                         item.classList.remove('active');
